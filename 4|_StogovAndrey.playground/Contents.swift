@@ -1,9 +1,10 @@
 import PlaygroundSupport
+import CoreGraphics
 PlaygroundPage.current.needsIndefiniteExecution == true
 
 //Основной класс машина
 class Car {
-    var brand: String
+    var brand: String // марка машины
     let fuel: FuelCar
     var ageCar: Int
     let box: BoxCar
@@ -75,6 +76,7 @@ class Car {
 //Дочерний класс Грузовые машины
 class TrunkCar: Car {
     
+    let brandCar: String //модель
     var routSheet: String //маршпутный лист
     let capacity: Int // грузоподьемность
     
@@ -93,9 +95,11 @@ class TrunkCar: Car {
             case fasten = "Пристегнуть прицеп"
         }    }
     
-    init(brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, capacity: Int, conditionEngine: String, conditionWindow: String, routSheet: String) {
+    init(brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, capacity: Int, conditionEngine: String, conditionWindow: String, routSheet: String, brandCar: String) {
+        
         self.capacity = capacity
         self.routSheet = routSheet
+        self.brandCar = brandCar
         super.init(brand: brand, fuel: fuel, ageCar: ageCar, box: box, conditionEngine: conditionEngine, conditionWindow: conditionWindow)
     }
     
@@ -108,11 +112,29 @@ class TrunkCar: Car {
         
     }
     
+    func TruckMethod (truck: TruckCar) -> String {
+        
+        switch truck {
+        case .baggage(baggage: let b) where b == .fasten:
+            return "\(b.rawValue) к \(self.brand)"
+        case .baggage(baggage: let a) where a == .unFasten:
+            return "\(a.rawValue) к \(self) \(brandCar)"
+        case .endVolumeBaggageCar(editBaggage: let b) where b == .loading:
+            return "\(b.rawValue) в \(self.brand) \(brandCar)"
+        case .endVolumeBaggageCar(editBaggage: let a) where a == .unloading:
+            return "\(a.rawValue) из \(self.brand) \(brandCar)"
+            
+        default:
+            return " "
+        }
+    }
+    
 }
     
 //Дочерний класс Спорткары
 class SportCar: Car {
     
+    let brandModel: String // модель
     let engineLocation: Engine // расположение двигателя
     let circulation: Int // тиражность машин
     var copyCar: Int // экземпляр
@@ -131,10 +153,12 @@ class SportCar: Car {
         }
     }
     
-    init(brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, conditionEngine: String, conditionWindow: String, engineLocation: Engine, circulation: Int, copyCar: Int) {
+    init(brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, conditionEngine: String, conditionWindow: String, engineLocation: Engine, circulation: Int, copyCar: Int, brandModel: String) {
+       
         self.engineLocation = engineLocation
         self.circulation = circulation
         self.copyCar = copyCar
+        self.brandModel = brandModel
         super.init(brand: brand, fuel: fuel, ageCar: ageCar, box: box, conditionEngine: conditionEngine, conditionWindow: conditionWindow)
     }
     
