@@ -39,6 +39,7 @@ class Car {
     }
     
     init (brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, conditionEngine: String, conditionWindow: String) {
+        
         self.brand = brand
         self .ageCar = ageCar
         self.box = box
@@ -56,17 +57,16 @@ class Car {
         switch Car {
         case .editEngineCar(editEngine: let run) where run == .runEngine:
             conditionEngine = run.rawValue
-            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine) Окна: \(conditionWindow)"
+            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine)"
         case .editEngineCar(editEngine: let close) where close == .closeEngine:
             conditionEngine = close.rawValue
-            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine) Окна: \(conditionWindow)"
+            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine)"
         case .windCar(editWindow: let open) where open == .openWindow:
             conditionWindow = open.rawValue
-            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine) Окна: \(conditionWindow)"
+           return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Окна: \(conditionWindow)"
         case .windCar(editWindow: let closeW) where closeW == .closeWindow:
             conditionWindow = closeW.rawValue
-            return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine) Окна: \(conditionWindow)"
-            
+           return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Окна: \(conditionWindow)"
         default:
             return "Модель: \(brand) Топливо: \(fuel.rawValue) Год выпуска: \(ageCar) Тарнсмиссия: \(box.rawValue) Состояние: \(conditionEngine) Окна: \(conditionWindow)"
         }
@@ -110,16 +110,25 @@ class TrunkCar: Car {
     
     override func EditCar(Car: VolumCar) -> String {
         
+        switch Car {
+        case .editEngineCar(editEngine: .runEngine):
+            return "Запрещено производить погрузку/выгрузку при запущенном двигателе"
+        case .editEngineCar(editEngine: .closeEngine):
+            return "Разрешено производить погрузку/выгрузку"
+        default:
+            return " "
+        }
         
     }
+
     
     func TruckMethod (truck: TruckCar) -> String {
         
         switch truck {
         case .baggage(baggage: let b) where b == .fasten:
-            return "\(b.rawValue) к \(self.brand)"
+            return "\(b.rawValue) к \(self.brand) \(brandCar)"
         case .baggage(baggage: let a) where a == .unFasten:
-            return "\(a.rawValue) к \(self) \(brandCar)"
+            return "\(a.rawValue) к \(self.brand) \(brandCar)"
         case .endVolumeBaggageCar(editBaggage: let b) where b == .loading:
             return "\(b.rawValue) в \(self.brand) \(brandCar)"
         case .endVolumeBaggageCar(editBaggage: let a) where a == .unloading:
@@ -129,7 +138,6 @@ class TrunkCar: Car {
             return " "
         }
     }
-    
 }
     
 //Дочерний класс Спорткары
@@ -141,7 +149,7 @@ class SportCar: Car {
     var copyCar: Int // экземпляр
     
     enum Engine: String {
-        case frintEngine = "Впереди"
+        case frontEngine = "Впереди"
         case backTngine = "В конце"
     }
     
@@ -154,7 +162,7 @@ class SportCar: Car {
         }
     }
     
-    init(brand: String, fuel: FuelCar, ageCar: Int, box: BoxCar, conditionEngine: String, conditionWindow: String, engineLocation: Engine, circulation: Int, copyCar: Int, brandModel: String) {
+    init(brand: String ,fuel: FuelCar, ageCar: Int, box: BoxCar, conditionEngine: String, conditionWindow: String, engineLocation: Engine, circulation: Int, copyCar: Int, brandModel: String) {
        
         self.engineLocation = engineLocation
         self.circulation = circulation
@@ -165,6 +173,19 @@ class SportCar: Car {
     
     deinit {
         
+    }
+    
+    override func EditCar(Car: Car.VolumCar) -> String {
+        
+        switch Car {
+        case .editEngineCar(editEngine: .runEngine):
+            return "Запрещено производить Чип-тюнинг на заведенной машине"
+        case .editEngineCar(editEngine: .closeEngine):
+            return "Разрешается производить тютинг авто"
+            
+        default:
+            return " "
+        }
     }
     
     func ChipMethod (chip: SuperCar) -> String {
@@ -184,12 +205,33 @@ class SportCar: Car {
 
 
 
-var pr: Car = Car (brand: "BMW", fuel: .petrol, ageCar: 2012, box: .automate, conditionEngine: "заглушен", conditionWindow: "Закрыты")
+var BMW: Car = Car (brand: "BMW", fuel: .petrol, ageCar: 2012, box: .automate, conditionEngine: "заглушен", conditionWindow: "Закрыты")
 
 
-pr.brand
-pr.fuel.rawValue
-pr.box.rawValue
-pr.conditionEngine
+BMW.brand
+BMW.fuel.rawValue
+BMW.box.rawValue
+BMW.conditionEngine
+BMW.EditCar(Car: .editEngineCar(editEngine: .runEngine))
+BMW.EditCar(Car: .windCar(editWindow: .openWindow))
 
-pr.EditCar(Car: .editEngineCar(editEngine: .runEngine))
+
+var Volvo:TrunkCar = TrunkCar (brand: "Мерседес", fuel: .petrol, ageCar: 2019, box: .mechanical, capacity: 50000, conditionEngine: "Заглушен", conditionWindow: "Закрыты", routSheet: "Москва Владивосток", brandCar: "RS1200")
+Volvo.brand
+Volvo.brandCar
+Volvo.box.rawValue
+Volvo.capacity
+
+Volvo.TruckMethod(truck: .baggage(baggage: .fasten))
+Volvo.EditCar(Car: .editEngineCar(editEngine: .runEngine))
+Volvo.conditionEngine
+Volvo.TruckMethod(truck: .endVolumeBaggageCar(editBaggage: .loading))
+
+var Lancer:SportCar = SportCar (brand: "Mitsubishi", fuel: .petrol, ageCar: 2013, box: .automate, conditionEngine: "Запущен", conditionWindow: "Открыты", engineLocation: .frontEngine, circulation: 6000, copyCar: 1120, brandModel: "Lancer Evo")
+Lancer.brand
+Lancer.brandModel
+Lancer.copyCar
+Lancer.ageCar
+Lancer.ChipMethod(chip: .tuningCar(chipCar: .tuningEngine))
+Lancer.EditCar(Car: .editEngineCar(editEngine: .runEngine))
+Lancer.box.rawValue
