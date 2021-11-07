@@ -1,5 +1,6 @@
 import PlaygroundSupport
 import CoreGraphics
+import Foundation
 PlaygroundPage.current.needsIndefiniteExecution == true
 
 //Основной класс машина
@@ -149,7 +150,7 @@ class SportCar: Car {
         
         enum ChipEngine: String {
             case tuningEngine = "Чипировать двигатель"
-            case unTuningEngine = "Не чипировать двигатель"
+            case unTuningEngine = "Оставить заводские настройки двигателя"
         }
     }
     
@@ -164,6 +165,20 @@ class SportCar: Car {
     
     deinit {
         
+    }
+    
+    func ChipMethod (chip: SuperCar) -> String {
+        
+        switch chip {
+        case .tuningCar(chipCar: let c) where c == .tuningEngine:
+            return "\(c.rawValue) в \(self.brand) \(brandModel)"
+        case .tuningCar(chipCar: let b) where b == .unTuningEngine:
+            return "\(b.rawValue) в \(self.brand) \(brandModel)"
+            
+        default:
+            return " "
+            
+        }
     }
 }
 
