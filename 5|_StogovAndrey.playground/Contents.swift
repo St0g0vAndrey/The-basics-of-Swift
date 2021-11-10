@@ -81,10 +81,10 @@ extension Car {
          
         switch wind {
         case .open:
-            actionWin = .open
+            return actionWin = .open
             //return "Открыты "
         case .close:
-            actionWin = .close
+            return actionWin = .close
             //return "Закрыты"
         }
     }
@@ -93,10 +93,10 @@ extension Car {
         
         switch eng {
         case .runEngine:
-            actionEng = .runEngine
+            return actionEng = .runEngine
             //return "Запущен"
         case .muffleEngine:
-            actionEng = .muffleEngine
+            return actionEng = .muffleEngine
             //return "Заглушен"
         }
     }
@@ -109,8 +109,8 @@ class TruckCar: Car {
     var fuel: FuelCar
     var transmission: TransmissionCar
     var steeringWhel: SteerngWhelCar
-    var actionWin: WindowCar = .close
-    var actionEng: EngineCar = .muffleEngine
+    var actionWin: WindowCar = .open
+    var actionEng: EngineCar = .runEngine
     
     //Собственные свойства
     var ModelCar: String
@@ -190,18 +190,18 @@ extension SportCar: CustomStringConvertible {
 
 var Buick = SportCar(brabd: "Buick", ModelCar: "Park Avenue", age: 1992, fuel: .petrol, transmission: .automate, steeringWhel: .left, locationEng: .fronEngine, driveUnit: .front)
 
-//Buick.PrintOutProt()
+Buick.PrintOutProt()
 Buick.brand
 Buick.ModelCar
 Buick.transmission.rawValue
 Buick.driveUnit.rawValue
-Buick.EditeWindow(wind: .open)
-Buick.EditeEngine(eng: .runEngine)
+Buick.EditeWindow(wind: .close)
+Buick.EditeEngine(eng: .muffleEngine)
 Buick.actionWin
 Buick.actionEng
 
 var Volvo = TruckCar (brand: "Volvo", ModelCar: "SR 1200", age: 2003, fuel: .diesel, transmission: .mechanical, steeringWhel: .left, volumeBaggage: 500000)
 
-//Volvo.PrintOutProt()
+Volvo.PrintOutProt()
 Volvo.EditeEngine(eng: .runEngine)
 Volvo.actionEng
