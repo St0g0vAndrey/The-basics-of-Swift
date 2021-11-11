@@ -82,10 +82,8 @@ extension Car {
         switch wind {
         case .open:
             return actionWin = .open
-            //return "Открыты "
         case .close:
             return actionWin = .close
-            //return "Закрыты"
         }
     }
     
@@ -94,10 +92,8 @@ extension Car {
         switch eng {
         case .runEngine:
             return actionEng = .runEngine
-            //return "Запущен"
         case .muffleEngine:
             return actionEng = .muffleEngine
-            //return "Заглушен"
         }
     }
 }
@@ -115,7 +111,6 @@ class TruckCar: Car {
     //Собственные свойства
     var ModelCar: String
     let volumeBaggage: Int
-    //var action: WindowCar = .close
     
     init(brand: String, ModelCar: String, age: Int, fuel: FuelCar, transmission: TransmissionCar, steeringWhel: SteerngWhelCar, volumeBaggage: Int) {
         self.brand = brand
@@ -183,7 +178,6 @@ extension SportCar: CustomStringConvertible {
     
     var description: String {
         return "Марка \(brand) Модель: \(ModelCar) \nСостояние: Двигатель: \(actionEng) Окна: \(actionWin)"
-        
     }
     
 }
@@ -197,11 +191,16 @@ Buick.transmission.rawValue
 Buick.driveUnit.rawValue
 Buick.EditeWindow(wind: .close)
 Buick.EditeEngine(eng: .muffleEngine)
-Buick.actionWin
-Buick.actionEng
+print(Buick)
 
 var Volvo = TruckCar (brand: "Volvo", ModelCar: "SR 1200", age: 2003, fuel: .diesel, transmission: .mechanical, steeringWhel: .left, volumeBaggage: 500000)
 
+Volvo.brand
+Volvo.ModelCar
+Volvo.fuel.rawValue
 Volvo.PrintOutProt()
-Volvo.EditeEngine(eng: .runEngine)
+Volvo.volumeBaggage
+Volvo.EditeEngine(eng: .muffleEngine)
 Volvo.actionEng
+print(Volvo)
+
