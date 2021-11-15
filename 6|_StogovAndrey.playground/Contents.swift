@@ -14,11 +14,6 @@ struct SomeStruct <MyNewTYpe> {
         return newArray
     }
     
-    func FilterString() -> [MyNewTYpe] {
-        let newArray = queue.sorted {$0<$1}
-        return newArray
-        
-    }
     func PrintArray () {
         for i in queue {
             print(i)
