@@ -4,7 +4,6 @@ import Foundation
 struct SomeStruct <MyNewTYpe> {
     var queue = [MyNewTYpe] ()
     
-    
     mutating func push (_ elment: MyNewTYpe) {
         queue.append(elment)
     }
