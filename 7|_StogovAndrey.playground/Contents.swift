@@ -2,22 +2,27 @@ import PlaygroundSupport
 import Foundation
 import CoreText
 
-PlaygroundPage.current.needsIndefiniteExecution == true
-
-enum ErrorList {
+enum ErrorList: Error {
     case noName
+    case noPrice
 }
 
-enum NameTelephone: String {
-    case apple = "Apple"
-    case samsung = "Samsung"
-    case honor = "Honor"
-    case blackberry = "BlackBerry"
-}
-
-class Telephone {
+class Telephone: Error {
     
-    var name: NameTelephone
-    var model: String
-    var
+    let CollectionPhone = [
+        "Apple": "13 Pro Mac",
+        "Samsung": "s21",
+        "BlackBerry": "Evolve",
+        "Honor": "50 Lite"
+    ]
+    
+    func SearchName(name: String) throws {
+        
+        guard (CollectionPhone[name] != nil) else {
+            throw ErrorList.noName
+        }
+        
+        
+    }
 }
+
