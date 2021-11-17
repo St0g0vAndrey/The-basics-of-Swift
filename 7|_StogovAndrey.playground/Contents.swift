@@ -51,7 +51,7 @@ func UserPrice (user: String, solutionUser: Phone) throws {
 
 var User = Phone()
 
-User.deposit = 10000
+User.deposit = 100000
 
 do {
     try UserPrice(user: "Александр", solutionUser: User)
