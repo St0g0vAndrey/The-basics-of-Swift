@@ -51,10 +51,10 @@ func UserPrice (user: String, solutionUser: Phone) throws {
 
 var User = Phone()
 
-User.deposit = 100000
+User.deposit = 10000
 
 do {
-    try UserPrice(user: "Евгений", solutionUser: User)
+    try UserPrice(user: "Александр", solutionUser: User)
 } catch ErrorList.noName {
     print("Ошибка выбора")
 } catch ErrorList.noPrice {
@@ -62,46 +62,3 @@ do {
 } catch {
     print ("Неожиданная ошибка")
 }
-
-
-
-/*
-struct PriceTelephone {
-    var nameT: String
-    var price: Int
-}
-
-class Telephone: Error {
-    
-    var priceBuy = [
-        "Iphone 13 Pro Max": PriceTelephone(nameT: "13 Pro MAx", price: 96000),
-        "Samsung s21": PriceTelephone(nameT: "s21", price: 102000),
-        "Honor 50 Lite": PriceTelephone(nameT: "50 Lite", price: 32000)
-    ]
-    
-    var money = 90000
-
-    func SearchName(nameT: String, money: Int) throws {
-        
-        guard let phone = priceBuy[nameT] else {
-            throw ErrorList.noName
-        }
-        
-        guard phone.price < money else {
-            throw ErrorList.noPrice
-        }
-        
-        print("Вы купили телефон \(phone.nameT) за \(phone.price) рублей")
-    }
-}
-
-
-
-let CollectionPhone = [
-    "Apple": "13 Pro Mac",
-    "Samsung": "s21",
-    "BlackBerry": "Evolve",
-    "Honor": "50 Lite"
-]
-
-*/
